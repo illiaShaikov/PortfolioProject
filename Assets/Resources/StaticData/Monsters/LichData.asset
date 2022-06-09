@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992a33b5c911255498b5350d5f24b2f1, type: 3}
+  m_Name: LichData
+  m_EditorClassIdentifier: 
+  MonsterTypeID: 0
+  Hp: 12
+  MoveSpeed: 3
+  AttackCooldown: 1
+  Damage: 5
+  EffectiveDistance: 1
+  Cleavage: 1
+  MonsterPrefab: {fileID: 1997799479343867455, guid: f02d23afea57b6a4da2cd2e0d31e0da5,
+    type: 3}

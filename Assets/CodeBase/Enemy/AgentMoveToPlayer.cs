@@ -1,5 +1,6 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,32 +10,26 @@ namespace CodeBase.Enemy
     {
         private const float MinimalDistance = 1f;
 
-        [SerializeField] private NavMeshAgent _agent;
+        private NavMeshAgent _agent;
 
         private Transform _heroTransform;
-        //private IGameFactory _gameFactory;
-       
+        private IGameFactory _gameFactory;
+
         private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
         }
 
-        private void Start()
-        {
-            //_gameFactory = AllServices.Container.Single<IGameFactory>();
-        }
+        public void Construct(Transform heroTransform) => _heroTransform = heroTransform;
 
-        private void Update()
+        private void Update() => SetDestinationForAgent();
+
+        private void SetDestinationForAgent()
         {
-            if (HeroNotReached())
+            if (_heroTransform)
             {
                 _agent.destination = _heroTransform.position;
-            }              
-        }
-
-        private bool HeroNotReached()
-        {
-            return Vector3.Distance(_agent.transform.position, _heroTransform.position) >= MinimalDistance;
+            }
         }
     }
 }
