@@ -2,6 +2,7 @@
 using CodeBase.Infrastructure.Services.PersistantProgress;
 using System;
 using System.Collections.Generic;
+using CodeBase.Enemy;
 using CodeBase.StaticData;
 using UnityEngine;
 
@@ -15,7 +16,8 @@ namespace CodeBase.Infrastructure.Factory
         List<ISavedProgress> ProgressWriters { get; }
         GameObject HUDGameobject { get; }
         void CleanUp();
-        void Register(ISavedProgressReader savedProgress);
         GameObject CreateMonster(MonsterTypeID monsterTypeID, Transform parent);
+        LootPiece CreateLoot();
+        void CreateSpawner(string id, MonsterTypeID MonsterTypeID, Vector3 position);
     }
 }

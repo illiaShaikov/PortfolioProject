@@ -7,23 +7,34 @@ using CodeBase.Infrastructure.Services.PersistantProgress;
 using UnityEngine;
 using CodeBase.StaticData;
 
-namespace CodeBase.Logic
+namespace CodeBase.Logic.EnemySpawner
 {
-    public class EnemySpawner : MonoBehaviour,ISavedProgress
+    public class SpawnPoint : MonoBehaviour,ISavedProgress
     {
-        [SerializeField] private MonsterTypeID  MonsterTypeID;
-        [SerializeField] private bool _isSlain;
+        /*Properties*/
+        public string Id
+        {
+            get => _id;
+            set => _id = value;
+        }
 
+        public MonsterTypeID MonsterTypeID
+        {
+            get => _monsterTypeID;
+            set => _monsterTypeID = value;
+        }
+        
+        /*Fields*/
+        private MonsterTypeID  _monsterTypeID;
+        private bool _isSlain;
         private string _id;
         private IGameFactory _factory;
         private EnemyDeath _enemyDeath;
 
-        private void Awake()
+        public void Construct(IGameFactory gameFactory)
         {
-            _id = GetComponent<UniqueID>().Id;
-            _factory = AllServices.Container.Single<IGameFactory>();
+            _factory = gameFactory;
         }
-
         public void LoadProgress(PlayerProgress playerProgress)
         {
             if (playerProgress.KillData.ClearedSpawners.Contains(_id))

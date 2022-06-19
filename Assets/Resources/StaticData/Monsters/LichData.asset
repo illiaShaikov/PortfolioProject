@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: LichData
   m_EditorClassIdentifier: 
   MonsterTypeID: 0
+  MonsterPrefab: {fileID: 1997799479343867455, guid: f02d23afea57b6a4da2cd2e0d31e0da5,
+    type: 3}
   Hp: 12
   MoveSpeed: 3
   AttackCooldown: 1
   Damage: 5
   EffectiveDistance: 1
   Cleavage: 1
-  MonsterPrefab: {fileID: 1997799479343867455, guid: f02d23afea57b6a4da2cd2e0d31e0da5,
-    type: 3}
+  MinLoot: 1
+  MaxLoot: 10

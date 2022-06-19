@@ -6,6 +6,7 @@ namespace CodeBase.StaticData
     public class MonsterStaticData : ScriptableObject
     {
         public MonsterTypeID MonsterTypeID;
+        public GameObject MonsterPrefab;
         [Range(1,100)]
         public int Hp;
         [Range(1,20)]
@@ -19,7 +20,9 @@ namespace CodeBase.StaticData
         [Range(0.5f,20)]
         public float Cleavage;
 
-        public GameObject MonsterPrefab;
+        public int MinLoot;
+        public int MaxLoot;
+
     }
 }
 

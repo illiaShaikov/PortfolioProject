@@ -5,7 +5,10 @@ using CodeBase.Hero;
 using UnityEngine;
 using CodeBase.Infrastructure.Services.PersistantProgress;
 using CodeBase.Logic;
+using CodeBase.StaticData;
 using CodeBase.UI;
+using CodeBase.UI.Elements;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.States
 {
@@ -17,18 +20,25 @@ namespace CodeBase.Infrastructure.States
         private readonly LoadingScreen _loadingScreen;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly IStaticDataService _staticData;
 
         /*Constants*/
         private const string EnemySpawnerTag = "EnemySpawner";
         private const string InitialPointTag = "InitialPoint";
 
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingScreen loadingScreen, IGameFactory gameFactory, IPersistentProgressService persistentProgressService)
+        public LoadLevelState(GameStateMachine gameStateMachine,
+            SceneLoader sceneLoader,
+            LoadingScreen loadingScreen,
+            IGameFactory gameFactory,
+            IPersistentProgressService persistentProgressService,
+            IStaticDataService staticData)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _loadingScreen = loadingScreen;
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
+            _staticData = staticData;
         }
 
         public void Enter(string sceneName)
@@ -64,10 +74,12 @@ namespace CodeBase.Infrastructure.States
 
         private void InitSpawners()
         {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelStaticData levelData = _staticData.ForLevel(sceneKey);
+            
+            foreach (EnemySpawnerData enemySpawnerData in levelData.EnemySpawners)
             {
-                var spawner = obj.GetComponent<EnemySpawner>();
-                _gameFactory.Register(spawner);
+                _gameFactory.CreateSpawner(enemySpawnerData.Id, enemySpawnerData.MonsterTypeID, enemySpawnerData.position);
             }
         }
 
