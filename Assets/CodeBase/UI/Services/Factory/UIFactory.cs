@@ -12,7 +12,7 @@ namespace CodeBase.UI.Services.Factory
         }
         public void CreateRootUI()
         {
-            _assets.Instantiate("Assets/Resources/UI/RootUI.prefab");
+            _assets.Instantiate("UI/RootUI");
         }
         public void CreateShop()
         {
